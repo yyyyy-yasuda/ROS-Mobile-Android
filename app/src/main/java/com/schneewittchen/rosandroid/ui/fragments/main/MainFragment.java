@@ -26,24 +26,14 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.tabs.TabLayout;
 import com.schneewittchen.rosandroid.R;
-import com.schneewittchen.rosandroid.databinding.UpdatePopupWindowBinding;
+import com.schneewittchen.rosandroid.databinding.FragmentIntroBinding;
+import com.schneewittchen.rosandroid.databinding.FragmentMainBinding;
 import com.schneewittchen.rosandroid.viewmodel.MainViewModel;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 
-/**
- * TODO: Description
- *
- * @author Nico Studt
- * @version 1.0.1
- * @created on 10.01.2020
- * @updated on 27.07.2020
- * @modified by Nils Rottmann
- * @updated on 05.11.2020
- * @modified by Nico Studt
- */
 public class MainFragment extends Fragment implements OnBackPressedListener {
 
     public static final String TAG = MainFragment.class.getSimpleName();
@@ -54,17 +44,27 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
     Toolbar toolbar;
     MainViewModel mViewModel;
 
-
     public static MainFragment newInstance() {
         return new MainFragment();
     }
 
+    private FragmentMainBinding mainBinding;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        mainBinding = FragmentMainBinding.inflate(inflater, container, false);
+        View view = mainBinding.getRoot();
+        return view;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        tabLayout = view.findViewById(R.id.tabs);
-        toolbar = view.findViewById(R.id.toolbar);
-        drawerLayout = view.findViewById(R.id.drawer_layout);
+        super.onViewCreated(view, savedInstanceState);
+
+        tabLayout = mainBinding.tabs;
+        toolbar = mainBinding.toolbar;
+        drawerLayout = mainBinding.drawerLayout;
 
         navController = Navigation.findNavController(requireActivity(), R.id.fragment_container);
 
@@ -160,10 +160,9 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
         return super.onOptionsItemSelected(item);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+        mainBinding = null;
     }
 }
