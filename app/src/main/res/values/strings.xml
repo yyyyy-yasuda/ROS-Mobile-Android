@@ -78,5 +78,10 @@
         <item>roslaunch </item>
         <item>roscore</item>
     </string-array>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_master">RosMaster</string>
 
 </resources>

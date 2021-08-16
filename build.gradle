@@ -6,7 +6,7 @@ buildscript {
     apply from: "https://github.com/rosjava/rosjava_bootstrap/raw/kinetic/buildscript.gradle"
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.0'
+        classpath 'com.android.tools.build:gradle:4.2.2'
     }
 }
 
@@ -22,6 +22,16 @@ subprojects {
                 exclude "META-INF/NOTICE.txt"
             }
         }
+    }
+}
+
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        def nav_version = "2.3.5"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 

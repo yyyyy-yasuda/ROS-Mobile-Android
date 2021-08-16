@@ -65,8 +65,8 @@ public class MasterFragment extends Fragment implements TextView.OnEditorActionL
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentMasterBinding.inflate(inflater, container, false);
-
-        return binding.getRoot();
+        View mView = binding.getRoot();
+        return mView;
     }
 
     @Override
@@ -77,14 +77,14 @@ public class MasterFragment extends Fragment implements TextView.OnEditorActionL
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View mView, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(mView, savedInstanceState);
 
         mViewModel = new ViewModelProvider(requireActivity()).get(MasterViewModel.class);
 
         // Define Views --------------------------------------------------------------
-        ipAddressField = getView().findViewById(R.id.ipAddessTextView);
-        ipAddressLayout = getView().findViewById(R.id.ipAddessLayout);
+        ipAddressField = binding.ipAddessTextView;
+        ipAddressLayout = binding.ipAddessLayout;
 
         ipItemList = new ArrayList<>();
         ipArrayAdapter = new ArrayAdapter<>(this.getContext(),
@@ -131,9 +131,9 @@ public class MasterFragment extends Fragment implements TextView.OnEditorActionL
         // User input ------------------------------------------------------------------------------
 
         binding.connectButton.setOnClickListener(v -> {
-                updateMasterDetails();
-                mViewModel.setMasterDeviceIp(ipAddressField.getText().toString());
-                mViewModel.connectToMaster();
+            updateMasterDetails();
+            mViewModel.setMasterDeviceIp(ipAddressField.getText().toString());
+            mViewModel.connectToMaster();
         });
         binding.disconnectButton.setOnClickListener(v -> mViewModel.disconnectFromMaster());
         binding.helpButton.setOnClickListener(v -> showConnectionHelpDialog());
