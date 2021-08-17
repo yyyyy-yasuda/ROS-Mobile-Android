@@ -83,5 +83,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_master">RosMaster</string>
+    <string name="title_joystick">JOYSTICK</string>
 
 </resources>
